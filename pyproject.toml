@@ -1,9 +1,24 @@
 [tool.poetry]
 name = "lesspass-client"
-version = "0.1.0"
-description = "A LessPass API client written in Python"
+version = "0.1.1"
+description = "A LessPass API client written in Python."
 authors = ["Kyle Williams <kyle.anthony.williams2@gmail.com>"]
 license = "Unlicense"
+readme = "README.md"
+homepage = "https://github.com/SuperSonicHub1/lesspass-client"
+repository = "https://github.com/SuperSonicHub1/lesspass-client"
+documentation = "https://github.com/SuperSonicHub1/lesspass-client#readme"
+keywords = [
+	"lesspass",
+	"cli",
+	"password",
+	"manager"
+]
+classifiers = [
+	"License :: Public Domain",
+	"Topic :: Security",
+	"Topic :: Internet"
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
