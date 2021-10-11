@@ -47,6 +47,13 @@ def main():
 		elif args.id:
 			password_info = [password_info for password_info in passwords if password_info["id"] == args.id][0]
 
+		# Lesspass's JSON response returns "numbers" instead of "digits",
+		# so we'll need to fix that.
+
+		if "numbers" in password_info and "digits" not in password_info:
+			numbers = password_info.pop("numbers")
+			password_info.update({"digits": numbers})
+
 		password = generate_password(password_info, master_password)
 		password_info.update({"password": password})
 
