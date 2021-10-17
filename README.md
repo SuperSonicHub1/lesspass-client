@@ -1,4 +1,4 @@
- # LessPass Client
+# LessPass Client
 
 > A [LessPass][lesspass] client written in Python heavily 
 inspired by [lastpass-cli][lastpass-cli].
@@ -15,12 +15,12 @@ poetry install
 ## Help
 Run `lesspass-client --help` for the most up-to-date information.
 
-### .netrc
+### `.netrc`
 
 Use of a [`.netrc` file][netrc] for supplying your LessPass login and master
 password is **required**. There is currently no way to supply either using
 command line arguments or environment variables; both of these methods are
-[insecure][secrets-command-line], anyways. Use the host `lesspass` for sharing
+[insecure][secrets-command-line] anyways. Use the host `lesspass` for sharing
 your username and password, and the host `lesspass_gen` for storing your master
 password.
 
@@ -44,6 +44,7 @@ The format string supplies the following values:
 * uppercase
 * lowercase
 * numbers
+* digits
 
 For example, if you wanted to append your [Freesound][freesound] login to your
 .netrc file:
