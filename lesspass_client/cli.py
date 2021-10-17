@@ -51,7 +51,7 @@ def main():
 		# so we'll need to fix that.
 
 		if "numbers" in password_info and "digits" not in password_info:
-			numbers = password_info.pop("numbers")
+			numbers = password_info["numbers"]
 			password_info.update({"digits": numbers})
 
 		password = generate_password(password_info, master_password)
