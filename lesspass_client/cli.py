@@ -1,4 +1,5 @@
 from .api import LessPassClient
+from .boolean import BooleanOptionalAction
 from netrc import netrc
 from argparse import ArgumentParser
 from lesspass.password import generate_password
@@ -26,12 +27,27 @@ def main():
 		help="Format this command's output using Python's format string syntax (https://docs.python.org/3/library/string.html#formatstrings); useful for command line parsing."
 	)
 
+	parser_add = subparsers.add_parser("add", help="Add a password profile.")
+
+	parser_add.add_argument("site", help="Site of the password.")
+	parser_add.add_argument("login", help="Login to the site (email, username).")
+	parser_add.add_argument("--lowercase", action=BooleanOptionalAction, help="Have the password contain lowercase letters.", default=True)
+	parser_add.add_argument("--uppercase", action=BooleanOptionalAction, help="Have the password contain uppercase letters.", default=True)
+	parser_add.add_argument("--symbols", action=BooleanOptionalAction, help="Have the password contain symbols.", default=True)
+	parser_add.add_argument("--numbers", action=BooleanOptionalAction, help="Have the password contain numbers.", default=True)
+	parser_add.add_argument("-c", "--counter", type=int, help="The counter of the passowrd.", default=1)
+	parser_add.add_argument("-l", "--length", type=int, help="The length of the passowrd.", default=16)
+
 	args = parser.parse_args()
 
 	rc = netrc()
 	login, _, password = rc.authenticators("lesspass")
 	_, _, master_password = rc.authenticators("lesspass_gen")
 	client = LessPassClient(login, password)
+
+	if args.command == "add":
+		client.create_password(args.site, args.login, lowercase=args.lowercase,  uppercase=args.uppercase, numbers=args.numbers, symbols=args.symbols, counter=args.length, length=args.length)
+		return
 
 	passwords = client.passwords()
 
