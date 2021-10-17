@@ -27,13 +27,34 @@ class LessPassClient:
 		res.raise_for_status()
 		return res.json()["results"]
 
+	def create_password(self, site: str, login: str, lowercase: bool = True,  uppercase: bool = True, numbers: bool = True, symbols: bool = True, counter: int = 1, length: int = 16) -> dict:
+		password = {
+			"site": site,
+			"login": login,
+			"lowercase": lowercase,
+			"uppercase": uppercase,
+			"number": numbers,
+			"symbol": symbols,
+			"counter": counter,
+			"length": length,
+        	}
+		res = self.session.post(f'https://{self.api_domain}/passwords/', headers={'Authorization': f'JWT {self.token}'}, json=password)
+		res.raise_for_status()
+		return res.json()
+
 if __name__ == "__main__":
 	from netrc import netrc
 	from pprint import pprint as print
+	from sys import argv
 
 	rc = netrc()
 	login, _, password = rc.authenticators("lesspass")
 	client = LessPassClient(login, password)
+
+	if len(argv) > 1:
+		if argv[1] == "create":
+			info = client.create_password("example.org", "example@example.org")
+			print(info)
 
 	passwords = client.passwords()
 	print(passwords)
