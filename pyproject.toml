@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lesspass-client"
-version = "0.1.1"
+version = "0.2.0"
 description = "A LessPass API client written in Python."
 authors = ["Kyle Williams <kyle.anthony.williams2@gmail.com>"]
 license = "Unlicense"
